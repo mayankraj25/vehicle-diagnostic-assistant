@@ -1,0 +1,12 @@
+pandas 
+numpy
+faiss-cpu
+sentence-transformers
+faster-whisper
+pyttsx3
+openai
+streamlit
+plotly
+obd
+sounddevice
+soundfile

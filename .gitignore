@@ -1,0 +1,35 @@
+# Python virtual environment — never commit this
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.Python
+
+# Model weights — too large for GitHub
+models/
+*.bin
+*.pt
+*.onnx
+
+# Audio files — temporary, not source code
+audio_temp/
+*.wav
+*.mp3
+
+# FAISS index files — these get rebuilt from source
+knowledge_base/
+
+# Data files — real driving sessions stay private
+data/sessions/
+
+# Mac system files
+.DS_Store
+.AppleDouble
+
+# Environment variables and secrets
+.env
+*.key
+
+# IDE files
+.vscode/
+.idea/
