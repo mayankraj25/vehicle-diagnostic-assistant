@@ -1,0 +1,37 @@
+{
+  "P0171": {
+    "name": "System Too Lean Bank 1",
+    "causes": "Vacuum leak, dirty MAF sensor, weak fuel pump, clogged injectors",
+    "urgency": "moderate",
+    "safe_to_drive": true,
+    "hyundai_note": "Common on Creta 1.5 petrol after 40,000 km due to intake manifold gasket wear"
+  },
+  "P0217": {
+    "name": "Engine Coolant Over Temperature",
+    "causes": "Low coolant, thermostat failure, water pump failure, head gasket issue",
+    "urgency": "critical",
+    "safe_to_drive": false,
+    "hyundai_note": "Pull over immediately. Continuing to drive risks catastrophic engine damage"
+  },
+  "P0300": {
+    "name": "Random Misfire Detected",
+    "causes": "Worn spark plugs, faulty ignition coil, fuel delivery issue",
+    "urgency": "high",
+    "safe_to_drive": false,
+    "hyundai_note": "Check coil-on-plug connectors first on Creta petrol variants"
+  },
+  "P0420": {
+    "name": "Catalyst System Efficiency Below Threshold",
+    "causes": "Failing catalytic converter, oxygen sensor fault, exhaust leak",
+    "urgency": "low",
+    "safe_to_drive": true,
+    "hyundai_note": "Common after 80,000 km. Can wait for scheduled service"
+  },
+  "P0507": {
+    "name": "Idle Control System RPM High",
+    "causes": "Vacuum leak, dirty throttle body, faulty IAC valve",
+    "urgency": "moderate",
+    "safe_to_drive": true,
+    "hyundai_note": "Throttle body cleaning often resolves this on Creta"
+  }
+}
