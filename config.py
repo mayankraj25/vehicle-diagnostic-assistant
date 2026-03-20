@@ -1,5 +1,3 @@
-# config.py
-
 ENVIRONMENT = "simulated"   # change to "live" when dongle arrives
 
 # OBD connection (used only in live mode)
