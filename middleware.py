@@ -8,9 +8,13 @@ def load_data(path):
 
 def compute_features(df):
 
-    # Rate of change of coolant temperature per minute
-    df["coolant_dT_dt"] = df["coolant_temp_c"].diff() / \
-                          (df["elapsed_seconds"].diff() / 60)
+    # Rate of change of coolant temperature per minute (only if data is present)
+    coolant_available = "coolant_temp_c" in df.columns and df["coolant_temp_c"].notna().any()
+    if coolant_available:
+        df["coolant_dT_dt"] = df["coolant_temp_c"].diff() / \
+                              (df["elapsed_seconds"].diff() / 60)
+    else:
+        df["coolant_dT_dt"] = np.nan
 
     # Rolling average RPM over last 10 seconds (20 samples at 2Hz)
     df["rpm_rolling"] = df["rpm"].rolling(window=20).mean()
@@ -30,7 +34,7 @@ def detect_events(df):
         ts = str(row["timestamp"])
 
         # Coolant overtemperature
-        if row["coolant_temp_c"] > COOLANT_TEMP_MAX:
+        if pd.notna(row.get("coolant_temp_c")) and row["coolant_temp_c"] > COOLANT_TEMP_MAX:
             events.append({
                 "timestamp": ts,
                 "severity":  "critical",
@@ -41,13 +45,14 @@ def detect_events(df):
 
         # Coolant rising fast
         elif pd.notna(row.get("coolant_dT_dt")) and row["coolant_dT_dt"] > 1.5:
+            coolant_str = f" Current temp: {row['coolant_temp_c']:.1f}C." \
+                          if pd.notna(row.get("coolant_temp_c")) else ""
             events.append({
                 "timestamp": ts,
                 "severity":  "warning",
                 "system":    "cooling",
                 "event":     f"Coolant temperature rising at "
-                             f"{row['coolant_dT_dt']:.1f}C per minute. "
-                             f"Current temp: {row['coolant_temp_c']:.1f}C."
+                             f"{row['coolant_dT_dt']:.1f}C per minute.{coolant_str}"
             })
 
         # Long term fuel trim warning

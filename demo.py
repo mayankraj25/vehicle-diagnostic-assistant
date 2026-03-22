@@ -5,13 +5,13 @@ from knowledge_base_builder import build_knowledge_base, retrieve_context
 from llm_engine import ask_llm
 from voice_input import listen
 from voice_output import speak
-from config import SIMULATED_CSV, ENVIRONMENT
+from config import SIMULATED_CSV, LIVE_CSV, ENVIRONMENT
 
 def initialise():
     print("Initialising Creta Assistant...")
 
     # Build knowledge base from current data
-    csv_path = SIMULATED_CSV if ENVIRONMENT == "simulated" else get_live_csv()
+    csv_path = SIMULATED_CSV if ENVIRONMENT == "simulated" else LIVE_CSV
     events   = run_middleware(csv_path)
 
     if events:
